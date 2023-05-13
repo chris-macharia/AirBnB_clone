@@ -4,11 +4,10 @@ import uuid
 from datetime import datetime
 from . import storage
 
-
 class BaseModel:
     """BaseModel class"""
 
-    def __init__(self, *args **kwargs):
+    def __init__(self, *args, **kwargs):
         """Initializes a new instance"""
         if kwargs:
             dformat = "%Y-%m-%dT%H:%M:%S.%f"
@@ -31,7 +30,7 @@ class BaseModel:
     def save(self):
         """Updates the attr updated_at with the current datetime"""
         self.updated_at = datetime.now()
-	storage.save()
+        storage.save()
 
     def to_dict(self):
         """Returns a dict containing all keys/values of __dict__"""
@@ -40,3 +39,4 @@ class BaseModel:
         dict["created_at"] = self.created_at.isoformat()
         dict["updated_at"] = self.updated_at.isoformat()
         return dict
+
