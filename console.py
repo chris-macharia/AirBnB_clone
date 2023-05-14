@@ -4,13 +4,15 @@ import cmd
 import shlex
 from models import storage
 from models.base_model import BaseModel
-
+from models.user import User
 
 class HBNBCommand(cmd.Cmd):
     """Hbnb console"""
 
     prompt = "(hbnb) "
-    allowed_classes = {"BaseModel": BaseModel}
+    allowed_classes = {"BaseModel": BaseModel,
+                       "User": User 
+                      }
 
     def emptyline(self):
         """Method to cancel last command repetition"""
