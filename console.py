@@ -40,7 +40,9 @@ class HBNBCommand(cmd.Cmd):
             print(new_obj.id)
 
     def do_show(self, line):
-        """Prints the string representation of an instance based on the class name and id.
+        """
+        Prints the string representation of an instance
+        based on the class name and id.
         """
         command = self.parseline(line)[0]
         arg = self.parseline(line)[1]
@@ -56,6 +58,26 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
             else:
                 print(inst_data)
+
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id.
+        """
+        command = self.parseline(line)[0]
+        arg = self.parseline(line)[1]
+        if command is None:
+            print('** class name missing **')
+        elif command not in self.allowed_classes:
+            print("** class doesn't exist **")
+        elif arg == '':
+            print('** instance id missing **')
+        else:
+            key = command + '.' + arg
+            inst_data = models.storage.all().get(key)
+            if inst_data is None:
+                print('** no instance found **')
+            else:
+                del models.storage.all()[key]
+                models.storage.save()
 
 
 if __name__ == '__main__':
