@@ -34,3 +34,56 @@ The following table shows all the commands for storage management and explains h
 | all         | Displays all stored instances or all stored instances of a specific class by its `classname`. | `all` / `all <classname>` |
 | update      | Updates an instance (adds or modifies attributes) by its `classname`, `id`, `attribute` and its `value` to add/modify.  | `update <classname> <id> <attribute> <attrvalue>` |
 | destroy     | Deletes an instance by its `classname` and its `id`. | `destroy <classname> <id>` |
+
+
+## Execution
+
+`Interactive mode`
+
+```shell
+$ ./console.py
+(hbnb) help
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+(hbnb)
+(hbnb)
+(hbnb) quit
+$
+```
+
+`Non-Interactive Mode`
+
+```shell
+$ echo "help" | ./console.py
+(hbnb)
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+(hbnb)
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+Documented commands (type help <topic>):
+========================================
+EOF  all  create  destroy  help  quit  show  update
+(hbnb)
+$
+```
+
+`Examples using the Hbnb console`
+
+Console execution and `help` command implementation to get information about `quit` command:
+
+<img src="https://i.imgur.com/DCpKxZa.gif" width=550 alt="Example gif">
+
+`Create`, `update` and `show` command implementation to create and display a new instance:
+
+<img src="https://i.imgur.com/SZQqSYb.gif" width=550 alt="Example gif">
+
+`Create`, `destroy` and `all` command implementation to display how the `destroy` command works:
+
+<img src="https://i.imgur.com/Auuj3TI.gif" width=550 alt="Example gif">
