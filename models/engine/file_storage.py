@@ -2,6 +2,14 @@
 """Class creation to define attrs/methods of the console"""
 from os import path
 import json
+from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
 
 
 class FileStorage:
@@ -30,8 +38,11 @@ class FileStorage:
 
     def reload(self):
         """Deserializes the JSON file to __objects' dictionary'"""
-        from models.base_model import BaseModel
         if path.exists(self.__file_path):
             with open(self.__file_path, "r") as file:
                 for _, value in json.loads(file.read()).items():
-                    self.new(BaseModel(**value))
+                    class_name = value['__class__']
+                    if class_name == 'BaseModel':
+                        self.new(BaseModel(**value))
+                    elif class_name == 'User':
+                        self.new(User(**value))
