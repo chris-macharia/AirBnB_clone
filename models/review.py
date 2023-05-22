@@ -1,23 +1,12 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
-"""Review Module inherits from BaseModel class.
-
-Review Module contains the attributes to be assigned
-to the reviews created by the users.
-"""
-
+"""Review class that inherits from BaseModel"""
 from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Review Class
+    """Review class"""
 
-    Attributes:
-        place_id (str): The UUID of the Place the Review belongs to
-        user_id (str): The UUID of the User that made the review
-        text (str): The review the User wrote about the Place
-
-    """
-    place_id = ''
-    user_id = ''
-    text = ''
+    """Class attributes"""
+    place_id = ""
+    user_id = ""
+    text = ""
