@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Unittest for BaseModel class"""
 import unittest
+import os
 from models.base_model import BaseModel
 from datetime import datetime
 
@@ -8,18 +9,30 @@ from datetime import datetime
 class TestBaseModel(unittest.TestCase):
     """Test cases for BaseModel class"""
 
-    def setUp(self):
-        """Sets the class/obj"""
-        self.base_model = BaseModel()
-        self.base_model.id = "12345"
-        self.base_model.created_at = datetime.now()
-        self.base_model.updated_at = datetime.now()
+    @classmethod
+    def setUpClass(cls):
+        """Class method to open test's environment"""
+        cls.base_model = BaseModel()
+        try:
+            os.rename("file.json", "test_file.json")
+        except Exception:
+            pass
+
+    @classmethod
+    def tearDownClass(cls):
+        """Class method to close test's environment"""
+        try:
+            os.remove("file.json")
+            os.rename("test_file.json", "file.json")
+        except Exception:
+            pass
 
     def test_save_method(self):
         """Test case for 'save' method"""
         datetime_prev = self.base_model.updated_at
         self.base_model.save()
         self.assertGreater(self.base_model.updated_at, datetime_prev)
+        self.assertTrue(os.path.exists("file.json"))
 
     def test_str_method(self):
         """Test case for str instance representation"""

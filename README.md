@@ -19,6 +19,14 @@ This project is the first version of the AirBnB project, which is an AirBnB clon
 
 <img src="https://i.imgur.com/4biBGlj.png" alt="Project">
 
+## Code Style
+
+[Pycodestyle](https://pypi.org/project/pycodestyle/) was taken into account and implemented for all files.
+
+## Storage
+
+The [`FileStorage`](./models/engine/file_storage.py) class is in charge of managing the storage through a JSON file (`file.json`), the instances are created, updated or deleted, all this through a FileStorage instance called `storage`.
+
 ## Console
 
 The console is used to manage the storage of class instances (`file.json`), this console can be used and executed in two ways, which are interactive and non-interactive mode.
@@ -34,7 +42,6 @@ The following table shows all the commands for storage management and explains h
 | all         | Displays all stored instances or all stored instances of a specific class by its `classname`. | `all` / `all <classname>` |
 | update      | Updates an instance (adds or modifies attributes) by its `classname`, `id`, `attribute` and its `value` to add/modify.  | `update <classname> <id> <attribute> <attrvalue>` |
 | destroy     | Deletes an instance by its `classname` and its `id`. | `destroy <classname> <id>` |
-
 
 ## Execution
 
