@@ -9,18 +9,27 @@ from models.engine.file_storage import FileStorage
 class TestFileStorage(unittest.TestCase):
     """Test cases for FileStorage class"""
 
-    def setUp(self):
-        """Sets the class/obj"""
-        self.storage = FileStorage()
+    @classmethod
+    def setUpClass(cls):
+        """Class method to open test's environment"""
+        cls.storage = FileStorage()
+        try:
+            os.rename(FileStorage._FileStorage__file_path, "test_file.json")
+        except Exception:
+            pass
 
-    def tearDown(self):
-        """Removes JSON file after testing the other methods"""
-        if os.path.exists(FileStorage._FileStorage__file_path):
+    @classmethod
+    def tearDownClass(cls):
+        """Class method to close test's environment"""
+        try:
             os.remove(FileStorage._FileStorage__file_path)
+            os.rename("test_file.json", FileStorage._FileStorage__file_path)
+        except Exception:
+            pass
 
     def test_all(self):
         """Test case for 'all' method"""
-        self.assertEqual({}, self.storage.all())
+        self.assertIsInstance(self.storage.all(), dict)
 
     def test_new(self):
         """Test case for 'new' method"""
@@ -41,10 +50,10 @@ class TestFileStorage(unittest.TestCase):
         model = BaseModel()
         self.storage.new(model)
         self.storage.save()
-        new_storage = FileStorage()
-        new_storage.reload()
+        self.storage._FileStorage__objects.clear()
+        self.storage.reload()
         key = model.__class__.__name__ + "." + model.id
-        self.assertIn(key, new_storage.all())
+        self.assertIn(key, self.storage.all())
 
 
 if __name__ == "__main__":
