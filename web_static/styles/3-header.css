@@ -3,6 +3,9 @@ header {
     height: 70px;
     width: 100%;
     border-bottom: 1px solid #CCCCCC;
+    position: fixed;
+    top: 0;
+    z-index: 999; /* Optional: If you want the header to appear above other elements */
 }
 
 header .logo {
